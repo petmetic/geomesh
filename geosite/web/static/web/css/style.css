@@ -1,0 +1,36 @@
+body {
+    background-color: rgb(217, 210, 233);
+}
+
+.background-color {
+    background-color: rgb(142, 124, 195, 0.5);
+}
+
+.logo {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    color: rgb(53, 28, 117);
+}
+
+.logo:hover {
+    color: rgb(53, 28, 117);
+}
+
+.header-text-2 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-style: italic;
+    color: rgb(53, 28, 117);
+}
+
+.parag {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 100;
+    font-style: italic;
+    color: rgb(53, 28, 117);
+}
+
+.bullet-footer {
+    list-style: none;
+}
