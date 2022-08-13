@@ -1,3 +1,4 @@
 from django.contrib import admin
+from web.models import UserReport
 
-# Register your models here.
+admin.site.register(UserReport)

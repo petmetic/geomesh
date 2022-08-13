@@ -1,28 +1,34 @@
+from django.core.files import File
 from django.shortcuts import render, get_object_or_404
-from django.utils import timezone
-# from .models import Report
 from django.shortcuts import redirect
-
 from .forms import ReportForm
+from django.urls import reverse
+from .models import UserReport
+from .utils import txt2coordinates
 
 
 def index(request):
     if request.method == "POST":
-        form = ReportForm(request.POST)
+        form = ReportForm(request.POST, request.FILES)
         if form.is_valid():
-            pass
-            # core app logic send data to txtcoordinates
-        return redirect("report < ID >")
+            userreport = form.save()
+            output_file, log = txt2coordinates(userreport.input_file.path)
+            userreport.output_file = File(output_file, name="output.txt")
+            userreport.log = '\n'.join(log)
+            userreport.save()
+            output_file.close()
+
+            return redirect(reverse('report', kwargs={'uuid': userreport.key_uuid}))
     else:
         form = ReportForm()
     return render(request, 'web/index.html', {"form": form})
 
 
 def report(request, uuid):
-    report_object = get_object_or_404(Report, uuid=uuid)
+    report_object = get_object_or_404(UserReport, key_uuid=uuid)
     return render(request, 'web/report.html', {'report': report_object})
 
 
 def download(request, uuid):
-    report = get_object_or_404(Report, uuid=uuid)
-    return render(report.output_file, {'download': download})
+    userreport = get_object_or_404(UserReport, key_uuid=uuid)
+    return render(request, {'download': download})

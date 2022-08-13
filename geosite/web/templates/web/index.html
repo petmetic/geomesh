@@ -7,7 +7,7 @@
     </div>
 
     <div class="e-text">
-        <form action="{% url 'index' %}" method="post">
+        <form action="{% url 'index' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <input class="btn btn-light button" type="submit" value="Submit">
