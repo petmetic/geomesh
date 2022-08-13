@@ -11,10 +11,18 @@ body {
     font-weight: 500;
     font-style: italic;
     color: rgb(53, 28, 117);
+    /*padding-left: 50px;*/
 }
 
 .logo:hover {
     color: rgb(53, 28, 117);
+}
+
+.e-text {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 100;
+    color: rgb(53, 28, 117);
+    padding: 50px;
 }
 
 .header-text-2 {
@@ -28,6 +36,18 @@ body {
     font-family: 'Montserrat', sans-serif;
     font-weight: 100;
     font-style: italic;
+    color: rgb(53, 28, 117);
+}
+
+
+.button, #id_csv_upload {
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(53, 28, 117);
+    background-color: rgb(243, 246, 244);
+}
+
+label[for="id_csv_upload"] {
+    font-family: 'Montserrat', sans-serif;
     color: rgb(53, 28, 117);
 }
 

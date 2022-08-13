@@ -1,5 +1,16 @@
-{% extends "web/base.html"%}
+{% extends "web/base.html" %}
 
-{%  block content %}
-    <p>Hello world!</p>
-{%  endblock %}
+{% block content %}
+    <div class="e-text col"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid beatae cumque debitis
+        distinctio illo ipsam necessitatibus obcaecati optio pariatur placeat porro, quaerat quas, ratione repellendus
+        suscipit tempora, unde ut voluptas!</p>
+    </div>
+
+    <div class="e-text">
+        <form action="{% url 'index' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="btn btn-light button" type="submit" value="Submit">
+        </form>
+    </div>
+{% endblock %}
