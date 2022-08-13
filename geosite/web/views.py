@@ -1,4 +1,5 @@
 from django.core.files import File
+from django.http import HttpResponse, FileResponse
 from django.shortcuts import render, get_object_or_404
 from django.shortcuts import redirect
 from .forms import ReportForm
@@ -31,4 +32,4 @@ def report(request, uuid):
 
 def download(request, uuid):
     userreport = get_object_or_404(UserReport, key_uuid=uuid)
-    return render(request, {'download': download})
+    return FileResponse(open(userreport.output_file.path, 'rb'), as_attachment=True, filename="converted-points.txt")

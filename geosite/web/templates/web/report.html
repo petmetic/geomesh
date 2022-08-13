@@ -4,7 +4,7 @@
 
     <div class="e-text">
         <p> {{ report.log|linebreaks }}</p>
-        <p>Report goes here</p>
+        <a href="{% url 'download' uuid=report.key_uuid %}">Download</a>
     </div>
 
 {% endblock %}

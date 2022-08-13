@@ -1,4 +1,8 @@
 from django.contrib import admin
-from web.models import UserReport
+from .models import UserReport
 
-admin.site.register(UserReport)
+
+@admin.register(UserReport)
+class UserReportAdmin(admin.ModelAdmin):
+    list_display = ('created', 'key_uuid')
+    ordering = ['-created']

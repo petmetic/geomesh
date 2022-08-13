@@ -10,7 +10,7 @@ def txt2coordinates(input_file):
     f = StringIO()
 
     num_of_lines = len(lines)
-    log.append(f"Processing {num_of_lines} lines")
+    log.append(f"Processing: {num_of_lines} lines")
 
     final_num_of_lines = 0
     skipped_num_of_lines = 0
@@ -33,7 +33,7 @@ def txt2coordinates(input_file):
 
     f.seek(0)
 
-    log.append(f"Skipped number of lines {skipped_num_of_lines}")
-    log.append(f"Final number of lines {final_num_of_lines}")
+    log.append(f"Skipped number of lines: {skipped_num_of_lines}")
+    log.append(f"Final number of lines: {final_num_of_lines}")
 
     return f, log
