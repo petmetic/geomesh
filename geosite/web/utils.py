@@ -27,6 +27,8 @@ def txt2coordinates(input_file):
                 z = float(z)
                 print(f"{x},{y},{z}", file=f)
                 final_num_of_lines += 1
+            else:
+                skipped_num_of_lines += 1
         except ValueError:
             skipped_num_of_lines += 1
             pass
