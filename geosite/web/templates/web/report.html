@@ -3,6 +3,7 @@
 {% block content %}
 
     <div class="e-text">
+        <h2>Here is your report</h2>
         <p> {{ report.log|linebreaks }}</p>
         <a  href="{% url 'download' uuid=report.key_uuid %}">Download</a>
     </div>
