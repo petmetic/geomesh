@@ -1,31 +1,25 @@
 def pars3(lines, f):
     final_num_of_lines = 0
-    skipped_num_of_lines = 1
     for line in lines[1:]:
-        coordinates = line.strip().split(",")
-        x = coordinates[0]
-        y = coordinates[1]
-        z = coordinates[2]
+        coordinates = line.strip().split(",")  # ['414237.1700', '127086.2100', '000.00']
+        x, y, z = coordinates  # shorthand syntax for: x = coordinates[0] y = coordinates[1]
 
-        try:
-            if '.' in z:
+        if z and '.' in z:
+            try:
                 z = float(z)
-                if z > 0:
-                    print(f"{x},{y},{z}", file=f)
-                    final_num_of_lines += 1
-                else:
-                    skipped_num_of_lines += 1
-            else:
-                skipped_num_of_lines += 1
-        except ValueError:
-            skipped_num_of_lines += 1
-            pass
+            except ValueError:
+                continue
+
+            if z > 0:
+                print(f"{x},{y},{z}", file=f)
+                final_num_of_lines += 1
+
+    skipped_num_of_lines = len(lines) - final_num_of_lines
     return final_num_of_lines, skipped_num_of_lines
 
 
 def pars4(lines, f):
     final_num_of_lines = 0
-    skipped_num_of_lines = 1
     for line in lines[1:]:
         coordinates = line.strip().split(",")
         x = coordinates[0]
@@ -51,8 +45,8 @@ def pars4(lines, f):
                 print(f"{x},{y},{e}", file=f)
                 final_num_of_lines += 1
             else:
-                skipped_num_of_lines += 1
+                pass
         except ValueError:
-            skipped_num_of_lines += 1
-
+            pass
+    skipped_num_of_lines = len(lines) - final_num_of_lines
     return final_num_of_lines, skipped_num_of_lines
