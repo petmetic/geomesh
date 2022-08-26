@@ -25,9 +25,21 @@ class IndexTest(TestCase):
 class Txt2CoordinatesTest(TestCase):
 
     def test_basic_import(self):
+        """
+        We are running tests for filtering data, that does not have a z coordinate.
+        """
         f, log = txt2coordinates('web/fixtures/basic.csv')
         print(f)
         print(log)
+
+        output_txt = f.read().splitlines()
+        self.assertEqual(output_txt[0], '414236.6700,127085.7100,525.86')
+        self.assertEqual(output_txt[1], '414236.6800,127045.4700,529.03')
+        self.assertEqual(output_txt[2], '414236.9900,127036.1400,526.95')
+        self.assertEqual(output_txt[3], '414238.0200,127055.5300,528.96')
+        self.assertEqual(output_txt[4], '414238.3400,127027.1500,527.02')
+        self.assertEqual(output_txt[5], '414238.3800,127081.3700,526.54')
+        self.assertEqual(output_txt[6], '414238.4700,127058.8600,528.45')
 
         self.assertEqual(log[0], 'Processing: 25 lines')
         self.assertEqual(log[1], 'Skipped number of lines: 18')
@@ -99,9 +111,21 @@ class Txt2CoordinatesTest(TestCase):
         self.assertEqual(log[2], 'Final number of lines: 7')
 
     def test_basic_b_z_is_null(self):
+        """
+        We are testing if the code excludes the null values '0.00', '0' with the ''string for z.
+        """
         f, log = txt2coordinates('web/fixtures/basic_b_z_is_null.csv')
         print(f)
         print(log)
+
+        output_txt = f.read().splitlines()
+        self.assertEqual(output_txt[0], '414236.6700,127085.7100,525.86')
+        self.assertEqual(output_txt[1], '414236.6800,127045.4700,529.03')
+        self.assertEqual(output_txt[2], '414236.9900,127036.1400,526.95')
+        self.assertEqual(output_txt[3], '414238.0200,127055.5300,528.96')
+        self.assertEqual(output_txt[4], '414238.3400,127027.1500,527.02')
+        self.assertEqual(output_txt[5], '414238.3800,127081.3700,526.54')
+        self.assertEqual(output_txt[6], '414238.4700,127058.8600,528.45')
 
         self.assertEqual(log[0], 'Processing: 25 lines')
         self.assertEqual(log[1], 'Skipped number of lines: 18')
