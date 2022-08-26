@@ -10,8 +10,11 @@ def pars3(lines, f):
         try:
             if '.' in z:
                 z = float(z)
-                print(f"{x},{y},{z}", file=f)
-                final_num_of_lines += 1
+                if z > 0:
+                    print(f"{x},{y},{z}", file=f)
+                    final_num_of_lines += 1
+                else:
+                    skipped_num_of_lines += 1
             else:
                 skipped_num_of_lines += 1
         except ValueError:
