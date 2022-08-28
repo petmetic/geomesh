@@ -1,7 +1,8 @@
 from django.test import TestCase
 from django.core.files.uploadedfile import SimpleUploadedFile
 
-from .utils import txt2coordinates
+from web.utils import txt2coordinates
+from web.utils_functions import is_it_a_header
 
 
 class IndexTest(TestCase):
@@ -41,21 +42,31 @@ class Txt2CoordinatesTest(TestCase):
         self.assertEqual(output_txt[5], '414238.3800,127081.3700,526.54')
         self.assertEqual(output_txt[6], '414238.4700,127058.8600,528.45')
 
-        self.assertEqual(log[0], 'Processing: 25 lines')
-        self.assertEqual(log[1], 'Skipped number of lines: 18')
-        self.assertEqual(log[2], 'Final number of lines: 7')
+        self.assertIn('Processing: 24 lines', log)
+        self.assertIn('Skipped number of lines: 17', log)
+        self.assertIn('Final number of lines: 7', log)
 
     def test_basic_b_first_line_missing(self):
         """
-
+        We test what happens if the name of the columns is missing 'Position x, Position y, height...'
+        It should start with the list position 0, instead of 1.
         """
         f, log = txt2coordinates('web/fixtures/basic_b_first_line_missing.csv')
         print(f)
         print(log)
 
-        self.assertEqual(log[0], 'Processing: 25 lines')
-        self.assertEqual(log[1], 'Skipped number of lines: 18')
-        self.assertEqual(log[2], 'Final number of lines: 7')
+        output_txt = f.read().splitlines()
+        self.assertEqual(output_txt[0], '414236.6700,127085.7100,525.86')
+        self.assertEqual(output_txt[1], '414236.6800,127045.4700,529.03')
+        self.assertEqual(output_txt[2], '414236.9900,127036.1400,526.95')
+        self.assertEqual(output_txt[3], '414238.0200,127055.5300,528.96')
+        self.assertEqual(output_txt[4], '414238.3400,127027.1500,527.02')
+        self.assertEqual(output_txt[5], '414238.3800,127081.3700,526.54')
+        self.assertEqual(output_txt[6], '414238.4700,127058.8600,528.45')
+
+        self.assertIn('Processing: 24 lines', log)
+        self.assertIn('Skipped number of lines: 17', log)
+        self.assertIn('Final number of lines: 7', log)
 
     def test_basic_b_txt(self):
         """
@@ -75,9 +86,9 @@ class Txt2CoordinatesTest(TestCase):
         self.assertEqual(output_txt[5], '414238.3800,127081.3700,526.54')
         self.assertEqual(output_txt[6], '414238.4700,127058.8600,528.45')
 
-        self.assertEqual(log[0], 'Processing: 25 lines')
-        self.assertEqual(log[1], 'Skipped number of lines: 18')
-        self.assertEqual(log[2], 'Final number of lines: 7')
+        self.assertIn('Processing: 24 lines', log)
+        self.assertIn('Skipped number of lines: 17', log)
+        self.assertIn('Final number of lines: 7', log)
 
     def test_basic_b_int(self):
         """
@@ -97,18 +108,18 @@ class Txt2CoordinatesTest(TestCase):
         self.assertEqual(output_txt[5], '414238.3800,127081.3700,526.54')
         self.assertEqual(output_txt[6], '414238.4700,127058.8600,528.45')
 
-        self.assertEqual(log[0], 'Processing: 25 lines')
-        self.assertEqual(log[1], 'Skipped number of lines: 18')
-        self.assertEqual(log[2], 'Final number of lines: 7')
+        self.assertIn('Processing: 24 lines', log)
+        self.assertIn('Skipped number of lines: 17', log)
+        self.assertIn('Final number of lines: 7', log)
 
     def test_basic_b_xzy(self):
         f, log = txt2coordinates('web/fixtures/basic_b_xzy.csv')
         print(f)
         print(log)
 
-        self.assertEqual(log[0], 'Processing: 25 lines')
-        self.assertEqual(log[1], 'Skipped number of lines: 18')
-        self.assertEqual(log[2], 'Final number of lines: 7')
+        self.assertIn('Processing: 24 lines', log)
+        self.assertIn('Skipped number of lines: 17', log)
+        self.assertIn('Final number of lines: 7', log)
 
     def test_basic_b_z_is_null(self):
         """
@@ -127,18 +138,18 @@ class Txt2CoordinatesTest(TestCase):
         self.assertEqual(output_txt[5], '414238.3800,127081.3700,526.54')
         self.assertEqual(output_txt[6], '414238.4700,127058.8600,528.45')
 
-        self.assertEqual(log[0], 'Processing: 25 lines')
-        self.assertEqual(log[1], 'Skipped number of lines: 18')
-        self.assertEqual(log[2], 'Final number of lines: 7')
+        self.assertIn('Processing: 24 lines', log)
+        self.assertIn('Skipped number of lines: 17', log)
+        self.assertIn('Final number of lines: 7', log)
 
     def test_basic_b_z_is_wrongfloat(self):
         f, log = txt2coordinates('web/fixtures/basic_b_z_is_wrongfloat.csv')
         print(f)
         print(log)
 
-        self.assertEqual(log[0], 'Processing: 25 lines')
-        self.assertEqual(log[1], 'Skipped number of lines: 18')
-        self.assertEqual(log[2], 'Final number of lines: 7')
+        self.assertIn('Processing: 24 lines', log)
+        self.assertIn('Skipped number of lines: 17', log)
+        self.assertIn('Final number of lines: 7', log)
 
     def test_basic_b_xyzz1(self):
         """
@@ -158,6 +169,22 @@ class Txt2CoordinatesTest(TestCase):
         self.assertEqual(output_txt[5], '414238.3800,127081.3700,526.54')
         self.assertEqual(output_txt[6], '414238.4700,127058.8600,528.45')
 
-        self.assertEqual(log[0], 'Processing: 25 lines')
-        self.assertEqual(log[1], 'Skipped number of lines: 18')
-        self.assertEqual(log[2], 'Final number of lines: 7')
+        self.assertIn('Processing: 24 lines', log)
+        self.assertIn('Skipped number of lines: 17', log)
+        self.assertIn('Final number of lines: 7', log)
+
+
+class HeaderTests(TestCase):
+    def test_is_it_a_header(self):
+        """
+        Trying to see if it knows that the first line is made of text or floats.
+        It should recognize that 'Position x, position y, position z' is a header.
+        """
+
+        answer = is_it_a_header(['Position x', 'Position z', 'a'])
+        answer1 = is_it_a_header(['1', 'a', '3'])
+        answer2 = is_it_a_header(['1', '2', '3'])
+        self.assertTrue(answer)
+        self.assertTrue(answer1)
+        self.assertFalse(answer2)
+
