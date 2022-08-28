@@ -1,1 +1,1 @@
-web: gunicorn geosite.wsgi
+web: gunicorn --pythonpath geosite geosite.wsgi
