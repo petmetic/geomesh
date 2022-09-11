@@ -28,7 +28,7 @@ if 'SECRET_KEY' in os.environ:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['geo-mesh.herokuapp.com']
+ALLOWED_HOSTS = ['geo-mesh.herokuapp.com', '127.0.0.1']
 
 # Application definition
 

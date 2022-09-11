@@ -3,9 +3,16 @@
 {% block content %}
 
     <div class="e-text">
-        <h2>Here is your report</h2>
-        <p> {{ report.log|linebreaks }}</p>
-        <a  href="{% url 'download' uuid=report.key_uuid %}">Download</a>
+        <h4>Here is your report after processing the {{ report.input_file.name }}</h4>
+        <p> {{ report.log|safe|linebreaks }}</p>
+        <br>
+        <p>Please download your file from the button below. <br>
+        </p>
+        <a class="btn btn-light button" href="{% url 'download' uuid=report.key_uuid %}">Download</a>
+        <br>
+        <br>
+        <p>If you have any problems, email me at <a class="highlight" href="mailto:petmetic@gmail.com">petmetic@gmail.com</a>
+        </p>
     </div>
 
 {% endblock %}
