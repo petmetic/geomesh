@@ -38,12 +38,15 @@ body {
     font-style: italic;
     color: rgb(53, 28, 117);
 }
-
+.highlight {
+    font-weight: 500;
+}
 
 .button, #id_csv_upload {
     font-family: 'Montserrat', sans-serif;
     color: rgb(53, 28, 117);
     background-color: rgb(243, 246, 244);
+    border: solid 1px darkgrey;
 }
 
 label[for="id_csv_upload"] {

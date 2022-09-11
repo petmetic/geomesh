@@ -1,14 +1,16 @@
 {% extends "web/base.html" %}
 
 {% block content %}
-    <div class="e-text col"><p>This app is for professionals who need exact terrain modeling from surveyors' data. It translates points from .csv file to a .txt file.
-For instructions on how to extract points from an AutoCAD file, please see tutorials for AutoCAD. Please be aware of how the 'z' coordinate is written! You might have to add an attribute to get the height of the coordinates.
+    <div class="e-text col"><p class="highlight">This app is for professionals who need exact terrain modeling from surveyors' data.</p>
+        <p>It translates points from .csv file to a .txt file.<br>
+        For instructions on how to extract points from an AutoCAD file, please see tutorials for AutoCAD.<br>
+            <br>
+        Please be aware of how the 'z' coordinate is written! You might have to add an attribute to get the height of the
+        coordinates.
         <br>
-        <br><strong>Please make sure that you exclude the rows of column name and number before making the .csv file!</strong><br>
-        <br>
-After you have acquired a .csv file, please upload the file and press submit. After your .csv file is processed in a few seconds, please use the download link to get your .txt file.</p>
+        After you have acquired a .csv file, please upload the file and press submit. <br>After your .csv file is processed
+        in a few seconds, please use the download link to get your .txt file.</p>
     </div>
-
     <div class="e-text">
         <form action="{% url 'index' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
