@@ -113,6 +113,10 @@ class Txt2CoordinatesTest(TestCase):
         self.assertIn('Final number of lines: 7', log)
 
     def test_basic_b_xzy(self):
+        """
+        We are testing if that app recognizes that the z coordinates in the y position and it corrects it.
+        This '457000,300,320000' should look like '457000,320000,300'.
+        """
         f, log = txt2coordinates('web/fixtures/basic_b_xzy.csv')
         print(f)
         print(log)
