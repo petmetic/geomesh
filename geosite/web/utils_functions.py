@@ -87,7 +87,7 @@ def get_col_indexes(line):
     for idx in range(0, len(line)):
         print("my idx is", idx)
         print("value at idx is", line[idx])
-        value = line[idx]
+        value = float(line[idx])
         if 30900.00 < value < 192600.00:
             x_index = idx
         elif 375300.00 < value < 623000.00:
